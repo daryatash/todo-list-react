@@ -14,6 +14,12 @@ export function TaskDetails({selectedTask}: TaskDetailsPropsType) {
                     <div>{selectedTask.title}</div>
                     <div>Описание: {!!selectedTask.description ? selectedTask.description : '-'} </div>
                     <div>Приоритет: {selectedTask.priority}</div>
+                    <div>
+                        Тэги: {selectedTask.tags.map(tag => { 
+                                return <div key={tag}>{tag}</div>
+                            }) 
+                        }
+                    </div>
                 </div>
             }
         </div>

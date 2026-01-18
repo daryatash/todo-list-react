@@ -5,5 +5,5 @@ export type TaskType = {
     dueDate: string
     priority: 'Low' | 'Medium' | 'High' | 'Critical'
     status: 'Not Started' | 'In Progress' | 'Completed'
-    tags: Array<string>
+    tags: string[]
 }

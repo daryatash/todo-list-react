@@ -24,7 +24,7 @@ export function TaskItem({task, setSelectedTask, isSelected}: TaskItemPropsType)
                 [styles.task__title]: true,
                 [styles.completed]: task.status === 'Completed'
             })}>{task.title}</h2>
-            <div>Статус выполнения: <input type='checkbox' checked={task.status === 'Completed'} /></div>
+            <div>Статус выполнения: {task.status}</div>
             <div>Выполнить до: <DateTime date={task.dueDate}/></div>
 
         </li>

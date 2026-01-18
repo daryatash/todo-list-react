@@ -4,14 +4,32 @@ import { api } from "../dal/api"
 
 export const useTasks = () => {
     const [tasks, setTasks] = useState<TaskType[] | null>(null)
+    const [refreshTrigger, setRefreshTrigger] = useState(0)
+    const [isLoading, setIsLoading] = useState(false)
+
+    const refreshTasks = () => {
+        setRefreshTrigger(prev => prev + 1);
+    }
+
+    const fetchTasks = async () => {
+        setIsLoading(true)
+        try {
+            const json = await api.getTasks()
+            setTasks(json)
+        } catch (error) {
+            console.log(error)
+        } finally {
+            setIsLoading(false)
+        }
+    }
     
     useEffect(() => {
-        api.getTasks().then((json) => {
-            setTasks(json)
-        })
-    }, [])
+        fetchTasks()
+    }, [refreshTrigger])
 
     return {
-        tasks
+        tasks,
+        isLoading,
+        refreshTasks
     }
 }

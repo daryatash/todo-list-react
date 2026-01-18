@@ -1,17 +1,17 @@
 import { TaskItem } from "./TaskItem";
-import { useTasks } from "../bll/useTasks";
 import styles from './Tasks.module.css'
 import type { TaskType } from "../types/types";
 
 type TaskListPropsType = {
+    tasks: TaskType[] | null
+    isLoading: boolean
     selectedTask: TaskType | null
     setSelectedTask: (task: TaskType | null) => void
 }
 
-export function TaskList({setSelectedTask, selectedTask}: TaskListPropsType) {
-    const { tasks } = useTasks()
+export function TaskList({tasks, isLoading, setSelectedTask, selectedTask}: TaskListPropsType) {
 
-    if (tasks === null) {
+    if (tasks === null || isLoading) {
         return <div>Loading...</div>
     }
 

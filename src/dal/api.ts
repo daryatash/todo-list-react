@@ -1,14 +1,28 @@
-import type { TaskType } from "../types/types"
-
 export const api = {
-    getTasks: () => {
-        const promise: Promise<TaskType[]> = fetch('https://shrimo.com/fake-api/todos', {
-                    /*headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    mode: 'cors',*/
+    getTasks: async () => {
+        const response = await fetch('https://shrimo.com/fake-api/todos', {
+                    headers: { 'Content-Type': 'application/json' },
                 })
-                .then((response) => response.json())
-        return promise
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+
+        const data = await response.json()
+
+        return data
+    },
+    addTask: async (newTask: any) => {
+        const response = await fetch('https://shrimo.com/fake-api/todos', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(newTask)
+        })
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`)
+        }
+
+        const data = await response.json()
+
+        return data
     }
 }

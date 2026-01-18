@@ -1,0 +1,8 @@
+.radio {
+    display: flex;
+    flex-direction: column;
+}
+
+.radio__error {
+    color: red;
+}
