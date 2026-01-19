@@ -11,11 +11,11 @@ export function TaskDetails({selectedTask}: TaskDetailsPropsType) {
             <h2>Details</h2>
             {!selectedTask && 'Task is not selected'}
             {selectedTask && <div>
-                    <div>{selectedTask.title}</div>
+                    <div>{selectedTask.content}</div>
                     <div>Description: {!!selectedTask.description ? selectedTask.description : '-'} </div>
                     <div>Priority: {selectedTask.priority}</div>
                     <div>
-                        Tags: {selectedTask.tags.map(tag => { 
+                        Tags: {selectedTask.labels.map(tag => { 
                                 return <div key={tag}>{tag}</div>
                             }) 
                         }
