@@ -8,14 +8,14 @@ type TaskDetailsPropsType = {
 export function TaskDetails({selectedTask}: TaskDetailsPropsType) {    
     return (
         <div className={styles.task__details}>
-            <h2>Подробнее</h2>
-            {!selectedTask && 'Задача не выбрана'}
+            <h2>Details</h2>
+            {!selectedTask && 'Task is not selected'}
             {selectedTask && <div>
                     <div>{selectedTask.title}</div>
-                    <div>Описание: {!!selectedTask.description ? selectedTask.description : '-'} </div>
-                    <div>Приоритет: {selectedTask.priority}</div>
+                    <div>Description: {!!selectedTask.description ? selectedTask.description : '-'} </div>
+                    <div>Priority: {selectedTask.priority}</div>
                     <div>
-                        Тэги: {selectedTask.tags.map(tag => { 
+                        Tags: {selectedTask.tags.map(tag => { 
                                 return <div key={tag}>{tag}</div>
                             }) 
                         }

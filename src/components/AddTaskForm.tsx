@@ -21,8 +21,7 @@ export function AddTaskForm({refreshTasks}: any) {
     const onSubmit = async (newTask: any) => {
         setIsSubmitting(true)
         try {
-            const json = await api.addTask(newTask)
-            console.log(json)
+            await api.addTask(newTask)
             reset()
             refreshTasks()
         } catch (error) {
@@ -38,7 +37,7 @@ export function AddTaskForm({refreshTasks}: any) {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <Field 
-                {...register('title', {
+                {...register('content', {
                     required: requiredMessage,
                     minLength: {
                         value: 1,
@@ -53,7 +52,6 @@ export function AddTaskForm({refreshTasks}: any) {
             />
             <Field 
                 {...register('description', {
-                    required: requiredMessage,
                     maxLength: {
                         value: 150,
                         message: 'Max length is 150 symbols'
@@ -66,9 +64,7 @@ export function AddTaskForm({refreshTasks}: any) {
                 disabled={isSubmitting}
             />
             <Field 
-                {...register('dueDate', {
-                    required: requiredMessage,
-                })}
+                {...register('due_date')}
                 id="dueDate"
                 label="Complete by"
                 error={errors.dueDate?.message as string}
@@ -79,75 +75,44 @@ export function AddTaskForm({refreshTasks}: any) {
                 <legend>Priority:</legend>
                 <label>
                     <input 
-                    {...register('priority', {required: 'Field is required'})}
+                    {...register('priority')}
                         type="radio" 
-                        value="Low" 
+                        value="1" 
                         disabled={isSubmitting}
                     />
                     Low
                 </label>
                 <label>
                     <input 
-                    {...register('priority', {required: 'Field is required'})}
+                    {...register('priority')}
                         type="radio" 
-                        value="Medium" 
+                        value="2" 
                         disabled={isSubmitting}
                     />
                     Medium
                 </label>
                 <label>
                     <input 
-                    {...register('priority', {required: 'Field is required'})}
+                    {...register('priority')}
                         type="radio" 
-                        value="High" 
+                        value="3" 
                         disabled={isSubmitting}
                     />
                     High
                 </label>
                 <label>
                     <input 
-                    {...register('priority', {required: 'Field is required'})}
+                    {...register('priority')}
                         type="radio" 
-                        value="Critical" 
+                        value="4" 
                         disabled={isSubmitting}
                     />
                     Critical
                 </label>
                 <span className={stylesRadio.radio__error}>{errors.priority?.message as string}</span>
             </fieldset>
-            <fieldset className={stylesRadio.radio}>
-                <legend>Status:</legend>
-                <label>
-                    <input 
-                    {...register('status', {required: 'Field is required'})}
-                        type="radio" 
-                        value="Not Started" 
-                        disabled={isSubmitting}
-                    />
-                    Not Started
-                </label>
-                <label>
-                    <input 
-                    {...register('status', {required: 'Field is required'})}
-                        type="radio" 
-                        value="In Progress" 
-                        disabled={isSubmitting}
-                    />
-                    In Progress
-                </label>
-                <label>
-                    <input 
-                    {...register('status', {required: 'Field is required'})}
-                        type="radio" 
-                        value="Completed" 
-                        disabled={isSubmitting}
-                    />
-                    Completed
-                </label>
-                <span>{errors.status?.message as string}</span>
-            </fieldset>
             <Controller 
-                name="tags"
+                name="labels"
                 control={control}
                 render={({field}) => (
                     <TagsField

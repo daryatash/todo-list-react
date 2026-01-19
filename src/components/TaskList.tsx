@@ -4,13 +4,16 @@ import type { TaskType } from "../types/types";
 
 type TaskListPropsType = {
     tasks: TaskType[] | null
+    filteredTasks: TaskType[] | null
     isLoading: boolean
     selectedTask: TaskType | null
     setSelectedTask: (task: TaskType | null) => void
+    refreshTasks: () => void
 }
 
-export function TaskList({tasks, isLoading, setSelectedTask, selectedTask}: TaskListPropsType) {
+export function TaskList({tasks, filteredTasks, isLoading, setSelectedTask, selectedTask, refreshTasks}: TaskListPropsType) {
 
+    console.log(tasks)
     if (tasks === null || isLoading) {
         return <div>Loading...</div>
     }
@@ -18,15 +21,20 @@ export function TaskList({tasks, isLoading, setSelectedTask, selectedTask}: Task
     if (tasks.length === 0) {
         return <div>No tasks</div>
     }
+
+    if (filteredTasks?.length === 0) {
+        return <div>Tasks not found</div>
+    }
     
     return (
         <>
             <ul className={styles.tasks__list}>
-                {tasks.map((task) => <TaskItem 
-                                        key={task._id} 
+                {(filteredTasks ?? tasks).map((task) => <TaskItem 
+                                        key={task.id} 
                                         task={task} 
-                                        isSelected={selectedTask?._id === task._id}
+                                        isSelected={selectedTask?.id === task.id}
                                         setSelectedTask={setSelectedTask}
+                                        refreshTasks={refreshTasks}
                                     />)}
             </ul>
         </>

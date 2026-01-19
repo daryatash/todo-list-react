@@ -15,7 +15,7 @@ export const useTasks = () => {
         setIsLoading(true)
         try {
             const json = await api.getTasks()
-            setTasks(json)
+            setTasks(json.results)
         } catch (error) {
             console.log(error)
         } finally {
