@@ -1,14 +1,18 @@
 import type { ResponseType } from "../types/types"
 
-const API_TOKEN = '15f65933e119030d03e67678a5c051578f74eab9'
+const API_TOKEN = '2b356bfdbf0d3a687ca673060c7308cf512ad64f'
+
+const URL = 'https://api.todoist.com/api/v1/tasks'
+
+const headers = {
+    'Authorization': `Bearer ${API_TOKEN}`,
+    'Content-Type': 'application/json'
+}
 
 export const api = {
     getTasks: async (): Promise<ResponseType> => {
-        const response = await fetch('https://api.todoist.com/api/v1/tasks', {
-                    headers: {
-                        'Authorization': `Bearer ${API_TOKEN}`,
-                        'Content-Type': 'application/json'
-                    }
+        const response = await fetch(URL, {
+                    headers
                 })
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`)
@@ -19,12 +23,9 @@ export const api = {
         return data
     },
     addTask: async (newTask: any) => {
-        const response = await fetch('https://api.todoist.com/api/v1/tasks', {
+        const response = await fetch(URL, {
             method: 'POST',
-            headers: {
-                'Authorization': `Bearer ${API_TOKEN}`,
-                'Content-Type': 'application/json'
-            },
+            headers,
             body: JSON.stringify(newTask)
         })
         if (!response.ok) {
@@ -36,13 +37,21 @@ export const api = {
         return data
     },
     deleteTask: async (id: string) => {
-        console.log(`[API] DELETE request for ID: ${id}`)
-        const response = await fetch(`https://api.todoist.com/api/v1/tasks/${id}`, {
+        const response = await fetch(`${URL}/${id}`, {
             method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${API_TOKEN}`,
-                'Content-Type': 'application/json'
-            },
+            headers
+        })
+
+        if (!response.ok) {
+            const errorText = await response.text()
+            throw new Error(`HTTP error! Status: ${response.status}, Response: ${errorText}`)
+        }
+    },
+    updateTask: async (id: string, updatedData: any) => {
+        const response = await fetch(`${URL}/${id}`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(updatedData)
         })
 
         if (!response.ok) {
@@ -50,8 +59,8 @@ export const api = {
             throw new Error(`HTTP error! Status: ${response.status}, Response: ${errorText}`)
         }
 
-        // const data = await response.json()
+        const data = await response.json()
 
-        // return data
-    }
+        return data
+    },
 }

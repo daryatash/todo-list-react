@@ -1,4 +1,6 @@
 import { forwardRef, useEffect, useState } from "react";
+import styles from './TagsField.module.css';
+import { Button } from "./Button";
 
 type TagsFieldPropsType = {
     name: string
@@ -56,22 +58,31 @@ export const TagsField = forwardRef<HTMLInputElement, TagsFieldPropsType>((props
     }
 
     return (
-        <div>
-            <label htmlFor={name}>Tags</label>
-            <input
-                id={name}
-                value={tagInput}
-                disabled={disabled}
-                onChange={(event) => setTagInput(event.target.value)} 
-            />
-            <button type='button' disabled={disabled} onClick={addTag}>Add tag</button>
+        <div className={styles['tags-field']}>
+            <label className={styles['tags-field__label']} htmlFor={name}>Tags</label>
+            <div className={styles['tags-field__main']}>
+                <input
+                    className={styles['tags-field__input']}
+                    id={name}
+                    value={tagInput}
+                    disabled={disabled}
+                    onChange={(event) => setTagInput(event.target.value)} 
+                />
+                <Button className={styles['tags-field__button']} disabled={disabled} onClick={addTag}>Add tag</Button>
+            </div>
             {error && <span>{error}</span>}
-            {tags && tags.map((tag) => {
-                return <div key={tag}>
-                            {tag}
-                            <button onClick={() => {deleteTag(tag)}}>х</button>
-                        </div>;
-            })}
+            <ul className={styles['tags-field__list']}>
+                {tags && tags.map((tag) => {
+                    return <li key={tag}
+                            className={styles['tags-field__item']}>
+                                {tag}
+                                <button 
+                                    onClick={() => {deleteTag(tag)}}
+                                    className={styles['tags-field__button-delete']}
+                                ></button>
+                            </li>;
+                })}
+            </ul>
             <input
                 type="hidden"
                 name={name}

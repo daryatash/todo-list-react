@@ -9,11 +9,23 @@ type TaskListPropsType = {
     selectedTask: TaskType | null
     setSelectedTask: (task: TaskType | null) => void
     refreshTasks: () => void
+    firstIncompleteTaskRef: any
+    firstIncompleteTaskId: string | null
 }
 
-export function TaskList({tasks, filteredTasks, isLoading, setSelectedTask, selectedTask, refreshTasks}: TaskListPropsType) {
+export const TaskList = (props: TaskListPropsType) => {
 
-    console.log(tasks)
+    const {
+        tasks, 
+        filteredTasks, 
+        isLoading, 
+        setSelectedTask, 
+        selectedTask, 
+        refreshTasks, 
+        firstIncompleteTaskRef,
+        firstIncompleteTaskId
+    } = props
+
     if (tasks === null || isLoading) {
         return <div>Loading...</div>
     }
@@ -35,6 +47,7 @@ export function TaskList({tasks, filteredTasks, isLoading, setSelectedTask, sele
                                         isSelected={selectedTask?.id === task.id}
                                         setSelectedTask={setSelectedTask}
                                         refreshTasks={refreshTasks}
+                                        ref={firstIncompleteTaskId === task.id ? firstIncompleteTaskRef : null}
                                     />)}
             </ul>
         </>

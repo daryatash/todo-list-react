@@ -1,17 +1,37 @@
 .container {
     display: flex;
     flex-direction: column;
+    max-width: 1120px;
+    margin-inline: auto;
+    padding: 20px;
 }
 
 .tasks {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 20px;
+}
+
+.tasks > div:nth-child(2) { /* второй столбец */
+    align-self: start;
+    position: sticky;
+    top: 20px;
+    max-height: calc(100vh - 40px); 
+    overflow-y: auto;
+}
+
+.tasks__total,
+.tasks__button {
+    margin-bottom: 10px;
 }
 
 .tasks__list {
     display: flex;
     flex-direction: column;
     row-gap: 15px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 .button_reset {
@@ -20,12 +40,16 @@
 
 .task {
     padding: 10px;
-    border: 2px solid rebeccapurple;
-    border-radius: 10px;
+    border-radius: 8px;
 
     &.selected {
-        border-color: red;
+        border: 1px solid black;
     }
+}
+
+.task__content {
+    display: flex;
+    column-gap: 10px;
 }
 
 .task__title {
@@ -34,8 +58,29 @@
     }
 }
 
-.task__details {
+.task__actions {
+    display: flex;
+    column-gap: 10px;
+}
+
+.task-details {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    margin-bottom: 10px;
+}
+
+.task-details__tags-list {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.task-details__tags-item {
+    display: flex;
+    align-items: center;
+    column-gap: 3px;
+    background-color: burlywood;
+    padding: 5px 7px;
+    border-radius: 15px;
 }

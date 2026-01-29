@@ -1,0 +1,61 @@
+.tags-field {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+}
+
+.tags-field__main {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  column-gap: 10px;
+}
+
+.tags-field__input {
+  height: 36px;
+  border-radius: 5px;
+  border: 1px solid #000000;
+  width: 100%;
+  padding-inline: 10px;
+}
+
+.tags-field__list {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+}
+
+.tags-field__item {
+  display: flex;
+  align-items: center;
+  column-gap: 3px;
+  background-color: burlywood;
+  padding: 5px 7px;
+  border-radius: 15px;
+}
+
+.tags-field__button-delete {
+  background: none;
+  border: none;
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 12px;
+    height: 2px;
+    background-color: #000000;
+    border-radius: 5px;
+  }
+
+  &::before {
+    rotate: 45deg;
+  }
+
+  &::after {
+    rotate: -45deg;
+  }
+}

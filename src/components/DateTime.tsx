@@ -2,7 +2,7 @@ type DateTimePropsType = {
     date: string
 }
 
-export function DateTime({ date }: DateTimePropsType) {
+export const DateTime = ({ date }: DateTimePropsType) => {
     const newDate = new Date(date)
 
     const formatter = new Intl.DateTimeFormat('ru', {

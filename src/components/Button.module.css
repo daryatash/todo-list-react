@@ -1,0 +1,24 @@
+.button {
+  padding-inline: 15px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 36px;
+  background: none;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  
+  &:hover:not([disabled]) {
+    background-color: #000000;
+    color: #ffffff;
+  }
+
+  &[disabled] {
+    border-color: gray;
+    cursor: default;
+  }
+}

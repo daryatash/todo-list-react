@@ -1,0 +1,13 @@
+@import './fonts.css';
+
+body {
+  font-family: 'Raleway', sans-serif;
+  font-size: 16px;
+  font-variant-numeric: lining-nums proportional-nums;
+  min-width: 700px;
+}
+
+button,
+a {
+  transition-duration: 0.2s;
+}
