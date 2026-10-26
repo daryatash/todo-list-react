@@ -1,6 +1,6 @@
 import type { ResponseType } from "../types/types"
 
-const API_TOKEN = '2b356bfdbf0d3a687ca673060c7308cf512ad64f'
+const API_TOKEN = 'fa3359193afa23f9d8e476a9ed7676f01ee14356'
 
 const URL = 'https://api.todoist.com/api/v1/tasks'
 
